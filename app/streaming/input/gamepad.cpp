@@ -790,6 +790,11 @@ void SdlInputHandler::handleJoystickArrivalEvent(SDL_JoyDeviceEvent* event)
 
 void SdlInputHandler::rumble(unsigned short controllerNumber, unsigned short lowFreqMotor, unsigned short highFreqMotor)
 {
+    // Check if rumble is disabled in settings
+    if (m_DisableRumble) {
+        return;
+    }
+
     // Make sure the controller number is within our supported count
     if (controllerNumber >= MAX_GAMEPADS) {
         return;
@@ -848,6 +853,10 @@ void SdlInputHandler::rumble(unsigned short controllerNumber, unsigned short low
 
 void SdlInputHandler::rumbleTriggers(uint16_t controllerNumber, uint16_t leftTrigger, uint16_t rightTrigger)
 {
+    // Check if rumble is disabled in settings
+    if (m_DisableRumble) {
+        return;
+    }
     // Make sure the controller number is within our supported count
     if (controllerNumber >= MAX_GAMEPADS) {
         return;
