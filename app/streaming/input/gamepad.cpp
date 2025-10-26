@@ -795,6 +795,10 @@ void SdlInputHandler::rumble(unsigned short controllerNumber, unsigned short low
         return;
     }
 
+    // Scale the lowFreqMotor and highFreqMotor by rumbleIntensity
+    lowFreqMotor = lowFreqMotor * m_RumbleIntensity;
+    highFreqMotor = highFreqMotor * m_RumbleIntensity;
+
 #if SDL_VERSION_ATLEAST(2, 0, 9)
     if (m_GamepadState[controllerNumber].controller != nullptr) {
         SDL_GameControllerRumble(m_GamepadState[controllerNumber].controller, lowFreqMotor, highFreqMotor, 30000);
@@ -852,6 +856,10 @@ void SdlInputHandler::rumbleTriggers(uint16_t controllerNumber, uint16_t leftTri
     if (controllerNumber >= MAX_GAMEPADS) {
         return;
     }
+
+    // Scale the leftTrigger and rightTrigger by rumbleIntensity
+    lowFreqMotor = lowFreqMotor * m_RumbleIntensity;
+    highFreqMotor = highFreqMotor * m_RumbleIntensity;
 
 #if SDL_VERSION_ATLEAST(2, 0, 14)
     if (m_GamepadState[controllerNumber].controller != nullptr) {

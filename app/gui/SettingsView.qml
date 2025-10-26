@@ -1466,6 +1466,37 @@ Flickable {
                     ToolTip.text: qsTr("This switches gamepads into a Nintendo-style button layout")
                 }
 
+                Label {
+                    width: parent.width
+                    id: rumbleIntensity
+                    text: qsTr("Rumble Intensity:")
+                    font.pointSize: 12
+                    wrapMode: Text.Wrap
+                }
+
+                Slider {
+                    id: rumbleIntensitySlider
+
+                    value: StreamingPreferences.rumbleIntensity
+
+                    stepSize: 0.01
+                    from : 0.0
+                    to: 1.0
+
+                    snapMode: "SnapOnRelease"
+                    width: Math.min(parent.width)
+
+                    onValueChanged: {
+                        rumbleIntensity.text = qsTr("Rumble Intensity: %1\%").arg(value * 100)
+                        StreamingPreferences.rumbleIntensity = value
+                    }
+
+                    Component.onCompleted: {
+                        // Refresh the text after translations change
+                        languageChanged.connect(valueChanged)
+                    }
+                }
+
                 CheckBox {
                     id: singleControllerCheck
                     width: parent.width
