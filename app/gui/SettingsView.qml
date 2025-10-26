@@ -1467,6 +1467,22 @@ Flickable {
                 }
 
                 CheckBox {
+                    id: disableRumbleCheck
+                    width: parent.width
+                    text: qsTr("Disable gamepad rumble")
+                    font.pointSize: 12
+                    checked: StreamingPreferences.disableRumble
+                    onCheckedChanged: {
+                        StreamingPreferences.enableRumble = checked
+                    }
+
+                    ToolTip.delay: 1000
+                    ToolTip.timeout: 5000
+                    ToolTip.visible: hovered
+                    ToolTip.text: qsTr("This disables gamepad rumble/vibrations")
+                }
+
+                CheckBox {
                     id: singleControllerCheck
                     width: parent.width
                     text: qsTr("Force gamepad #1 always connected")
