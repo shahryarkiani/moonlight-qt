@@ -364,6 +364,7 @@ void StreamCommandLineParser::parse(const QStringList &args, StreamingPreference
     parser.addToggleOption("background-gamepad", "background gamepad input");
     parser.addToggleOption("reverse-scroll-direction", "inverted scroll direction");
     parser.addToggleOption("swap-gamepad-buttons", "swap A/B and X/Y gamepad buttons (Nintendo-style)");
+    parser.addToggleOption("disable-gamepad-rumble", "Disable gamepad rumble/vibrations");
     parser.addToggleOption("keep-awake", "prevent display sleep while streaming");
     parser.addToggleOption("performance-overlay", "show performance overlay");
     parser.addToggleOption("hdr", "HDR streaming");
@@ -478,6 +479,9 @@ void StreamCommandLineParser::parse(const QStringList &args, StreamingPreference
 
     // Resolve --swap-gamepad-buttons and --no-swap-gamepad-buttons options
     preferences->swapFaceButtons = parser.getToggleOptionValue("swap-gamepad-buttons", preferences->swapFaceButtons);
+
+    // Resolve --disable-gamepad-rumble and --no-disable-gamepad-rumble options
+    preferences->disableRumble = parser.getToggleOptionValue("disable-gamepad-rumble", preferences->disableRumble);
 
     // Resolve --keep-awake and --no-keep-awake options
     preferences->keepAwake = parser.getToggleOptionValue("keep-awake", preferences->keepAwake);
